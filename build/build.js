@@ -102,23 +102,47 @@ ready(function () {
   var $image = $lightbox.querySelector('.lb-image');
   var $outerContainer = $lightbox.querySelector('.lb-outerContainer');
   var $loader = $lightbox.querySelector('.lb-loader');
-  var $modaldata = $lightbox.querySelector('.imagemodal');
   var $modalclose = $lightbox.querySelector('.lb-close');
   var $caption = $lightbox.querySelector('.lb-caption');
   var $albumlabel = $lightbox.querySelector('.lb-number');
   var $next = $lightbox.querySelector('.lb-next');
   var $prev = $lightbox.querySelector('.lb-prev');
   var current = 0;
+  var _imgReady = true;
 
-  $next.addEventListener('click', function () {
+  var nextImg = function nextImg() {
+    if (!_imgReady) {
+      return;
+    }
     current++;
     loadImage(current);
-  });
-  $prev.addEventListener('click', function () {
+  };
+
+  var prevImg = function prevImg() {
+    if (!_imgReady) {
+      return;
+    }
     current--;
     current = current < 0 ? images.length - 1 : current;
     loadImage(current);
+  };
+
+  $next.addEventListener('click', function () {
+    return nextImg();
   });
+  $prev.addEventListener('click', function () {
+    return prevImg();
+  });
+
+  var keyHandler = function keyHandler(ev) {
+    if (ev.code === 'ArrowLeft') {
+      prevImg();
+    } else if (ev.code === 'ArrowRight') {
+      nextImg();
+    } else if (ev.code === 'Escape') {
+      gallery.hide();
+    }
+  };
 
   $modalclose.addEventListener('click', function () {
     gallery.hide();
@@ -130,14 +154,17 @@ ready(function () {
   var preloadImages = [];
 
   var loadImage = function loadImage(n) {
+    if (!_imgReady) {
+      return;
+    }
+    _imgReady = false;
     current = n % images.length;
     var img = images[current];
     var preloader = preloadImages[current] || new Image();
     removeClass($image, 'lightbox__fadein');
-    removeClass($modaldata, 'lightbox__fadein');
     $loader.style.display = 'block';
-    $modaldata.style.display = 'none';
     preloader.onerror = function () {
+      _imgReady = true;
       preloadImages[current] = null;
       $loader.style.display = 'none';
       $caption.innerText = 'Error while loading the image.';
@@ -151,12 +178,13 @@ ready(function () {
       setTimeout(function () {
         attr($image, 'src', img.url);
         addClass($image, 'lightbox__fadein');
-        addClass($modaldata, 'lightbox__fadein');
         $albumlabel.innerText = 'Image ' + (current + 1) + ' of ' + images.length;
         $caption.innerText = img.title ? img.title : '';
+        setTimeout(function () {
+          _imgReady = true;
+        });
       }, 200);
       $loader.style.display = 'none';
-      $modaldata.style.display = 'block';
     };
 
     if (!preloadImages[current]) {
@@ -169,11 +197,13 @@ ready(function () {
 
   gallery.loadImage = loadImage;
 
-  gallery.show = function (n) {
+  gallery.show = function () {
+    var n = arguments.length <= 0 || arguments[0] === undefined ? current : arguments[0];
+
+    document.addEventListener('keyup', keyHandler);
     triggerEvent(document, 'lightbox-open');
-    if (n) {
-      loadImage(parseInt(n, 10));
-    }
+    loadImage(parseInt(n, 10));
+
     setTimeout(function () {
       addClass($lightbox, 'lightbox__fadein');
     }, 1);
@@ -182,6 +212,7 @@ ready(function () {
   };
 
   gallery.hide = function () {
+    document.removeEventListener('keyup', keyHandler);
     triggerEvent(document, 'lightbox-close');
     removeClass($lightbox, 'lightbox__fadein');
     $overlay.style.display = 'none';
@@ -191,7 +222,12 @@ ready(function () {
 
 module.exports = gallery;
 
-},{}]},{},[1])
+},{}],2:[function(require,module,exports){
+'use strict';
+
+window.vainillaGallery = require('./gallery');
+
+},{"./gallery":1}]},{},[2])
 
 
 //# sourceMappingURL=build.js.map

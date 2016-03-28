@@ -4,8 +4,26 @@
     <link rel="stylesheet" href="./css/modal.css">
   </head>
   <body>
-  <h1>dsa</h1>
+  <h1>Hello world</h1>
+
+
+  <a href="#" onclick="vainillaGallery.show(); return false;">Open the gallery!</a>
+
   <script src="./build.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function(){
+    vainillaGallery.addImage('https://avatars0.githubusercontent.com/u/332426?v=3&s=460', 'My github avatar, @eugenioclrc');
+
+    vainillaGallery.addImage('http://static.panoramio.com/photos/medium/16148929.jpg', 'Buenos Aires #1');
+    vainillaGallery.addImage('http://static.panoramio.com/photos/medium/1385681.jpg', 'Buenos Aires #2');
+    vainillaGallery.addImage('http://static.panoramio.com/photos/medium/51941392.jpg', 'Buenos Aires #3');
+    
+    //vainillaGallery.show();
+  });
+  </script>
+
+
+  <!-- lightbox modal -->
   <div id="lightboxOverlay" style="display:none" class="lightboxOverlay"></div>
   <div id="lightbox"  class="lightbox">
     <div class="lb-outerContainer">
