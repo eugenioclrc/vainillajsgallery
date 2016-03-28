@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="./css/lightbox.css">
+    <link rel="stylesheet" href="./css/modal.css">
+  </head>
+  <body>
+  <h1>Hello world</h1>
+
+
+  <a href="#" onclick="vainillaGallery.show(); return false;">Open the gallery!</a>
+  <br />
+  <br />
+  <br />
+  <style>
+  .light-gallery-container img {
+    cursor: pointer;
+    border: 1px solid #eee;
+    padding: 3px;
+    width: 100px;
+    height: 100px;
+    float: left;
+    margin: 10px;
+  }
+  .light-gallery-container img:hover {
+    border: 1px solid #333;
+  }
+  </style>
+  <div class="light-gallery-container">
+    <img src="https://avatars0.githubusercontent.com/u/332426?v=3&s=460" alt="My github avatar, @eugenioclrc" />
+    <img src="http://static.panoramio.com/photos/medium/16148929.jpg" alt="Buenos Aires #1" />
+    <img src="http://static.panoramio.com/photos/medium/1385681.jpg" alt="Buenos Aires #2" />
+    <img src="http://static.panoramio.com/photos/medium/51941392.jpg" alt="Buenos Aires #3" />
+  </div>
+
+
+  <script src="./build.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var nodesArray = [].slice.call(document.querySelectorAll('.light-gallery-container img'));
+    nodesArray.forEach(function(el, i){
+      vainillaGallery.addImage(el.getAttribute('src'), el.getAttribute('alt'));
+      el.addEventListener('click', function(){
+        vainillaGallery.show(i);
+      });
+    });
+  });
+  </script>
+
+
+  <!-- lightbox modal -->
+  <div id="lightboxOverlay" style="display:none" class="lightboxOverlay"></div>
+  <div id="lightbox"  class="lightbox">
+    <div class="lb-outerContainer">
+      <div class="lb-container"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" class="lb-image">
+        <div class="lb-nav"><a class="lb-prev"></a><a class="lb-next"></a></div>
+        <div class="lb-loader"><a class="lb-cancel"></a></div>
+      </div>
+    </div>
+    <div class="lb-dataContainer">
+      <div class="lb-data">
+        <div class="lb-details"><span class="lb-caption"></span><span class="lb-number"></span></div>
+        <div class="lb-closeContainer"><a class="lb-close"></a></div>
+      </div>
+    </div>
+  </div>
+  </body>
+</html>
