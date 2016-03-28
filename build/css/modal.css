@@ -1,0 +1,46 @@
+.hm-modal-head {
+  text-align: center;
+  font-size: 20px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+a.hm-modal-lnk {
+  border-radius: 2px;
+  background-color: #fff;
+  box-shadow: 0 2px #bbb;
+  cursor: pointer;
+  display: block;
+  font-size: 18px;
+  padding: 5px 0px 5px 20px;
+  margin-bottom: 13px;
+  text-align: left;
+}
+
+a.hm-modal-lnk:hover {
+  text-decoration: none;
+  color: #000099;
+  box-shadow: none;
+  background-color: #fff;
+}
+
+a.hm-modal-lnk.active {
+  background: #ccc;
+  box-shadow: 0 2px #bbb inset;
+}
+
+a.hm-modal-lnk i {
+  margin-right: 10px;
+}
+
+a.hm-modal-lnk i.icon-facebook-official {
+  color: #25599F;
+}
+
+a.hm-modal-lnk i.icon-gplus {
+  color: #F1492F;
+}
+
+a.hm-modal-lnk i.icon-twitter {
+  color: #00A8D2;
+}

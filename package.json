@@ -1,0 +1,28 @@
+{
+  "name": "vainilla-js-gallery",
+  "version": "1.0.0",
+  "description": "a simple hackable lightbox gallery",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "eufew"
+  },
+  "keywords": [
+    "s"
+  ],
+  "author": "eugenioclrc@gmail.com",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "browserify": "^13.0.0",
+    "eslint": "^2.5.1",
+    "eslint-config-airbnb": "^6.1.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
+  }
+}
